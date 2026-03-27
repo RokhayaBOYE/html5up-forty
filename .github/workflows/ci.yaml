@@ -45,6 +45,10 @@ jobs:
         run: |
           docker push $DOCKER_REGISTRY/$IMAGE_NAME:$IMAGE_TAG
 
+  # ===============================
+  # JOB 2 - scan-trivy : SCAN
+  # ===============================
+  scan-trivy:
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@0.20.0
         with:
@@ -56,16 +60,16 @@ jobs:
           ignore-unfixed: true
 
   # ===============================
-  # JOB 2 - CD : DEPLOY
+  # JOB 3 - CD : DEPLOY
   # ===============================
   deploy:
     needs: ci
     runs-on: aws-runner
 
     steps:
-      - name: Pull latest image
-        run: |
-          echo "Hello deploy"
+      # - name: Pull latest image
+      #   run: |
+      #     echo "Hello deploy"
 
       - name: Pull latest image
         run: |
